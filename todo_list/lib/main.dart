@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,21 +14,24 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: TodoListScreen(),
+      home: const TodoListScreen(),
     );
   }
 }
 
 class TodoListScreen extends StatefulWidget {
+  const TodoListScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _TodoListScreenState createState() => _TodoListScreenState();
 }
 
 class _TodoListScreenState extends State<TodoListScreen> {
-  List<TodoItem> _todoItems = [];
+  final List<TodoItem> _todoItems = [];
 
   void _addTodoItem(String task) {
-    if (task.length > 0) {
+    if (task.isNotEmpty) {
       setState(() => _todoItems.add(TodoItem(task: task)));
     }
   }
@@ -46,7 +51,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
             setState(() => _todoItems[index].completed = newValue!);
           },
           secondary: IconButton(
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
             onPressed: () => _removeTodoItem(index),
           ),
         );
@@ -58,13 +63,13 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todo List 💪'),
+        title: const Text('Todo List 💪'),
       ),
       body: _buildTodoList(),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddTodoDialog,
         tooltip: 'Add task',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -76,19 +81,19 @@ class _TodoListScreenState extends State<TodoListScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('New Task'),
+          title: const Text('New Task'),
           content: TextField(
             autofocus: true,
             controller: todoController,
-            decoration: InputDecoration(hintText: 'Enter task here...'),
+            decoration: const InputDecoration(hintText: 'Enter task here...'),
           ),
           actions: [
             TextButton(
-              child: Text('CANCEL'),
+              child: const Text('CANCEL'),
               onPressed: () => Navigator.of(context).pop(),
             ),
             TextButton(
-              child: Text('ADD'),
+              child: const Text('ADD'),
               onPressed: () {
                 _addTodoItem(todoController.text);
                 Navigator.of(context).pop();

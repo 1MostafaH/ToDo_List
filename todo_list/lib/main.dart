@@ -69,7 +69,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddTodoDialog,
         tooltip: 'Add task',
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.assignment_add),
       ),
     );
   }
